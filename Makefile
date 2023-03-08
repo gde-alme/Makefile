@@ -11,12 +11,12 @@
 # **************************************************************************** #
 
 # ================================================= #
-NAME		=	megaphone
+NAME		=	phoneBook
 # ================================================= #
 
 # ================================================= #
 SRCS_DIR	=	./
-SRCS		=	${wildcard *.cpp}
+SRCS		=	$(wildcard *.cpp)
 # ================================================= #
 
 # ================================================= #
@@ -30,7 +30,7 @@ OBJS		=	$(addprefix $(OBJS_DIR), $(OBJ))
 # ================================================= #
 
 # ================================================= #
-CC			=	@g++
+CXX			=	@c++
 FLAGS		=	-Wall -Wextra -Werror -std=c++98
 RM			=	@rm -rf
 # ================================================= #
@@ -38,20 +38,20 @@ RM			=	@rm -rf
 # ================================================= #
 $(OBJS_DIR)%.o :	$(SRCS_DIR)%.cpp
 	@mkdir -p $(OBJS_DIR)
-	@echo "\033[0;32mCompiling $<\033[0m"
-	$(CC) $(FLAGS) -c $< -o $@
+	@echo "\033[0;32mCompiling $<"
+	$(CXX) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(INC) $(FLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(INC) $(FLAGS) -o $(NAME) $(OBJS)
 
 all: $(NAME)
 
 clean:
-	@echo "\033[0;32mCleaning: $(OBJS_DIR)\033[0m"
+	@echo "\033[0;32mCleaning: $(OBJS_DIR)"
 	$(RM) $(OBJS_DIR)
 	
 fclean: clean
-	@echo "\033[0;32mCleaning: $(NAME)\033[0m"
+	@echo "\033[0;32mCleaning: $(NAME)"
 	$(RM) $(NAME)
 
 re: fclean all
