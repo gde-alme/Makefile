@@ -6,7 +6,7 @@
 #    By: gde-alme <gde-alme@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 01:03:14 by gde-alme          #+#    #+#              #
-#    Updated: 2023/03/21 14:48:09 by gde-alme         ###   ########.fr        #
+#    Updated: 2023/03/21 14:56:25 by gde-alme         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,14 @@ SRCS 		+=	WrongAnimal.cpp
 SRCS 		+=	WrongCat.cpp
 SRCS 		+=	Dog.cpp
 SRCS 		+=	Cat.cpp
+SRCS 		+=	Brain.cpp
 SRCS		+=	main.cpp
 # ================================================= #
 
 # ================================================= #
 INC			=	inc/Animal.hpp inc/WrongAnimal.hpp
 INC			+=	inc/WrongCat.hpp inc/Dog.hpp inc/Cat.hpp
+INC 		+=	inc/Brain.hpp
 # ================================================= #
 
 # ================================================= #
@@ -63,8 +65,8 @@ fclean: clean
 re: fclean all
 
 test: fclean
-	@g++ -D VERBOSE=false *.hpp *.cpp -o polymorphism
-	@./polymorphism
+	@g++ -D VERBOSE=false inc/*.hpp src/*.cpp -o $(NAME)
+	@./$(NAME)
 # ================================================= #
 
 .PHONY: all clean fclean re
