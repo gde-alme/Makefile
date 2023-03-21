@@ -1,14 +1,32 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gde-alme <gde-alme@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/03/09 01:03:14 by gde-alme          #+#    #+#              #
+#    Updated: 2023/03/21 14:48:09 by gde-alme         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # ================================================= #
-NAME		=	relevantName
+NAME	=	ex_01_exec
 # ================================================= #
 
 # ================================================= #
-SRCS_DIR	=	./
-SRCS		=	$(wildcard *.cpp) //add manually
+SRCS_DIR	=	./src/
+SRCS		=	Animal.cpp
+SRCS 		+=	WrongAnimal.cpp
+SRCS 		+=	WrongCat.cpp
+SRCS 		+=	Dog.cpp
+SRCS 		+=	Cat.cpp
+SRCS		+=	main.cpp
 # ================================================= #
 
 # ================================================= #
-INC			=	$(wildcard *.hpp) //add manually
+INC			=	inc/Animal.hpp inc/WrongAnimal.hpp
+INC			+=	inc/WrongCat.hpp inc/Dog.hpp inc/Cat.hpp
 # ================================================= #
 
 # ================================================= #
@@ -18,7 +36,7 @@ OBJS		=	$(addprefix $(OBJS_DIR), $(OBJ))
 # ================================================= #
 
 # ================================================= #
-CXX			=	@c++
+CC			=	@g++
 FLAGS		=	-Wall -Wextra -Werror -std=c++98
 RM			=	@rm -rf
 # ================================================= #
@@ -27,12 +45,10 @@ RM			=	@rm -rf
 $(OBJS_DIR)%.o :	$(SRCS_DIR)%.cpp
 	@mkdir -p $(OBJS_DIR)
 	@echo "\033[0;32mCompiling $<\033[0m"
-	$(CXX) $(FLAGS) -c $< -o $@
+	$(CC) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CXX) $(INC) $(FLAGS) $(OBJS)
-	@mv a.out $(NAME)
-	@mv *.gch $(OBJS_DIR)
+	$(CC) $(INC) $(FLAGS) -o $(NAME) $(OBJS)
 
 all: $(NAME)
 
@@ -45,6 +61,10 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+test: fclean
+	@g++ -D VERBOSE=false *.hpp *.cpp -o polymorphism
+	@./polymorphism
 # ================================================= #
 
 .PHONY: all clean fclean re
