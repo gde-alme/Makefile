@@ -34,9 +34,10 @@ RM		=	rm -rf
 
 # ============================================================================ #
 
-all: mkdir $(NAME)
+all: $(NAME)
 
 $(OBJS_DIR)%.o :	$(SRCS_DIR)%.cpp
+	@mkdir -p obj/
 	$(CXX) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
@@ -53,9 +54,6 @@ re: fclean all
 test: fclean
 	g++ -D VERBOSE=false inc/*.hpp src/*.cpp -o $(NAME)
 	@./$(NAME)
-
-mkdir:
-	mkdir -p obj/
 # ============================================================================ #
 
 .PHONY: all clean fclean re
