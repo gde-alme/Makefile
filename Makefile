@@ -6,7 +6,7 @@
 #    By: gde-alme <gde-alme@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/09 01:03:14 by gde-alme          #+#    #+#              #
-#    Updated: 2023/03/24 16:28:39 by gde-alme         ###   ########.fr        #
+#    Updated: 2023/03/24 18:04:51 by gde-alme         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,16 @@ RM			=	rm -rf
 # ================================================= #
 
 # ================================================= #
+#$(OBJS_DIR) :
+#	mkdir -p obj/
+
+all: mkdir $(NAME)
+
 $(OBJS_DIR)%.o :	$(SRCS_DIR)%.cpp
 	$(CXX) $(FLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
 	$(CXX) $(FLAGS) -o $(NAME) $(OBJS)
-
-all: dir $(NAME)
 
 clean:
 	$(RM) $(OBJS_DIR)
@@ -56,8 +59,8 @@ test: fclean
 	g++ -D VERBOSE=false inc/*.hpp src/*.cpp -o $(NAME)
 	@./$(NAME)
 
-dir:
-	mkdir -p $(OBJS_DIR)
+mkdir:
+	mkdir -p obj/
 # ================================================= #
 
 .PHONY: all clean fclean re
