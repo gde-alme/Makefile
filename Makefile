@@ -28,7 +28,7 @@ OBJS		=	$(addprefix $(OBJS_DIR), $(OBJ))
 
 # ============================================================================ #
 CXX		=	c++
-FLAGS		=	-Wall -Wextra -Werror -std=c++98
+FLAGS		=	-Wall -Wextra -Werror -fsanitize=address -std=c++98
 RM		=	rm -rf
 # ============================================================================ #
 
